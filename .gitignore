@@ -1,0 +1,40 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# macOS
+.DS_Store
+
+# AI secrets — never commit real Azure credentials
+**/Secrets.swift
+
+# Firebase
+firebase-debug.log
+firebase-debug.*.log
+functions/.env
+functions/.env.*
+functions/lib/
+
+# AI prompts and the Azure endpoint stay out of the repository.
+# functions/prompts/*.md hold the prompt text; only the README is tracked.
+functions/prompts/*
+!functions/prompts/README.md
+!functions/.env.example
+
+# Claude Code session files
+.claude/

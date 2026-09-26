@@ -1,0 +1,94 @@
+{
+  "identifier": "EDBF3621-FABA-43E5-AD6F-E43B8BC28A6A",
+  "nonRenewingSubscriptions": [],
+  "products": [],
+  "settings": {
+    "_failTransactionsEnabled": false,
+    "_locale": "en_US",
+    "_storefront": "USA",
+    "_storeKitErrors": []
+  },
+  "subscriptionGroups": [
+    {
+      "id": "21500001",
+      "localizations": [],
+      "name": "Satisfed Premium",
+      "subscriptions": [
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "2.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "6740000001",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Every meal, more satisfying.",
+              "displayName": "Weekly",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "satisfed_1w_weekly",
+          "recurringSubscriptionPeriod": "P1W",
+          "referenceName": "satisfed Weekly Premium",
+          "subscriptionGroupID": "21500001",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "7.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "6740000002",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "Every meal, more satisfying.",
+              "displayName": "Monthly",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "satisfed_1m_monthly",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "satisfed Monthly Premium",
+          "subscriptionGroupID": "21500001",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "39.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "6740000003",
+          "introductoryOffer": {
+            "internalID": "6740000101",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P1W"
+          },
+          "localizations": [
+            {
+              "description": "Every meal, more satisfying.",
+              "displayName": "Annual",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "satisfed_1y_annual",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "satisfed Annual Premium",
+          "subscriptionGroupID": "21500001",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 4,
+    "minor": 0
+  }
+}

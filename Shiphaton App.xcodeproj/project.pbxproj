@@ -1,0 +1,673 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1C0FEE10001000000000004 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = A1C0FEE10001000000000002 /* RevenueCat */; };
+		A1C0FEE10001000000000005 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = A1C0FEE10001000000000003 /* RevenueCatUI */; };
+		D2DAA3853049AA02002E5E10 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 64698BA991088807E059D938 /* FirebaseCore */; };
+		D2DAA3863049AA02002E5E10 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9F5757A594FDFCCCF1D768 /* FirebaseAppCheck */; };
+		D2DAA3873049AA02002E5E10 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 63429D5947869FBF84C9C91D /* FirebaseFunctions */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D2DAA27C3045C64C002E5E10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2DAA2643045C64A002E5E10 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2DAA26B3045C64A002E5E10;
+			remoteInfo = "Shiphaton App";
+		};
+		D2DAA2863045C64C002E5E10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2DAA2643045C64A002E5E10 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2DAA26B3045C64A002E5E10;
+			remoteInfo = "Shiphaton App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D2DAA26C3045C64A002E5E10 /* Shiphaton App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shiphaton App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2DAA27B3045C64C002E5E10 /* Shiphaton AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shiphaton AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2DAA2853045C64C002E5E10 /* Shiphaton AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shiphaton AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A1C0FEE10002000000000001 /* Exceptions for "Shiphaton App" folder in "Shiphaton App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Satisfed.storekit,
+			);
+			target = D2DAA26B3045C64A002E5E10 /* Shiphaton App */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D2DAA26E3045C64A002E5E10 /* Shiphaton App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A1C0FEE10002000000000001 /* Exceptions for "Shiphaton App" folder in "Shiphaton App" target */,
+			);
+			path = "Shiphaton App";
+			sourceTree = "<group>";
+		};
+		D2DAA27E3045C64C002E5E10 /* Shiphaton AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Shiphaton AppTests";
+			sourceTree = "<group>";
+		};
+		D2DAA2883045C64C002E5E10 /* Shiphaton AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Shiphaton AppUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2DAA2693045C64A002E5E10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2DAA3873049AA02002E5E10 /* FirebaseFunctions in Frameworks */,
+				D2DAA3863049AA02002E5E10 /* FirebaseAppCheck in Frameworks */,
+				D2DAA3853049AA02002E5E10 /* FirebaseCore in Frameworks */,
+				A1C0FEE10001000000000004 /* RevenueCat in Frameworks */,
+				A1C0FEE10001000000000005 /* RevenueCatUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2DAA2783045C64C002E5E10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2DAA2823045C64C002E5E10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D2DAA2633045C64A002E5E10 = {
+			isa = PBXGroup;
+			children = (
+				D2DAA26E3045C64A002E5E10 /* Shiphaton App */,
+				D2DAA27E3045C64C002E5E10 /* Shiphaton AppTests */,
+				D2DAA2883045C64C002E5E10 /* Shiphaton AppUITests */,
+				D2DAA26D3045C64A002E5E10 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D2DAA26D3045C64A002E5E10 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2DAA26C3045C64A002E5E10 /* Shiphaton App.app */,
+				D2DAA27B3045C64C002E5E10 /* Shiphaton AppTests.xctest */,
+				D2DAA2853045C64C002E5E10 /* Shiphaton AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D2DAA26B3045C64A002E5E10 /* Shiphaton App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2DAA28F3045C64C002E5E10 /* Build configuration list for PBXNativeTarget "Shiphaton App" */;
+			buildPhases = (
+				D2DAA2683045C64A002E5E10 /* Sources */,
+				D2DAA2693045C64A002E5E10 /* Frameworks */,
+				D2DAA26A3045C64A002E5E10 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D2DAA26E3045C64A002E5E10 /* Shiphaton App */,
+			);
+			name = "Shiphaton App";
+			packageProductDependencies = (
+				64698BA991088807E059D938 /* FirebaseCore */,
+				1D9F5757A594FDFCCCF1D768 /* FirebaseAppCheck */,
+				63429D5947869FBF84C9C91D /* FirebaseFunctions */,
+				A1C0FEE10001000000000002 /* RevenueCat */,
+				A1C0FEE10001000000000003 /* RevenueCatUI */,
+			);
+			productName = "Shiphaton App";
+			productReference = D2DAA26C3045C64A002E5E10 /* Shiphaton App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D2DAA27A3045C64C002E5E10 /* Shiphaton AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2DAA2923045C64C002E5E10 /* Build configuration list for PBXNativeTarget "Shiphaton AppTests" */;
+			buildPhases = (
+				D2DAA2773045C64C002E5E10 /* Sources */,
+				D2DAA2783045C64C002E5E10 /* Frameworks */,
+				D2DAA2793045C64C002E5E10 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2DAA27D3045C64C002E5E10 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D2DAA27E3045C64C002E5E10 /* Shiphaton AppTests */,
+			);
+			name = "Shiphaton AppTests";
+			packageProductDependencies = (
+			);
+			productName = "Shiphaton AppTests";
+			productReference = D2DAA27B3045C64C002E5E10 /* Shiphaton AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D2DAA2843045C64C002E5E10 /* Shiphaton AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2DAA2953045C64C002E5E10 /* Build configuration list for PBXNativeTarget "Shiphaton AppUITests" */;
+			buildPhases = (
+				D2DAA2813045C64C002E5E10 /* Sources */,
+				D2DAA2823045C64C002E5E10 /* Frameworks */,
+				D2DAA2833045C64C002E5E10 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2DAA2873045C64C002E5E10 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D2DAA2883045C64C002E5E10 /* Shiphaton AppUITests */,
+			);
+			name = "Shiphaton AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "Shiphaton AppUITests";
+			productReference = D2DAA2853045C64C002E5E10 /* Shiphaton AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D2DAA2643045C64A002E5E10 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					D2DAA26B3045C64A002E5E10 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					D2DAA27A3045C64C002E5E10 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = D2DAA26B3045C64A002E5E10;
+					};
+					D2DAA2843045C64C002E5E10 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = D2DAA26B3045C64A002E5E10;
+					};
+				};
+			};
+			buildConfigurationList = D2DAA2673045C64A002E5E10 /* Build configuration list for PBXProject "Shiphaton App" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D2DAA2633045C64A002E5E10;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				906CACA05ADF1860B8B733B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A1C0FEE10001000000000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D2DAA26D3045C64A002E5E10 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2DAA26B3045C64A002E5E10 /* Shiphaton App */,
+				D2DAA27A3045C64C002E5E10 /* Shiphaton AppTests */,
+				D2DAA2843045C64C002E5E10 /* Shiphaton AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D2DAA26A3045C64A002E5E10 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2DAA2793045C64C002E5E10 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2DAA2833045C64C002E5E10 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2DAA2683045C64A002E5E10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2DAA2773045C64C002E5E10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2DAA2813045C64C002E5E10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2DAA27D3045C64C002E5E10 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2DAA26B3045C64A002E5E10 /* Shiphaton App */;
+			targetProxy = D2DAA27C3045C64C002E5E10 /* PBXContainerItemProxy */;
+		};
+		D2DAA2873045C64C002E5E10 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2DAA26B3045C64A002E5E10 /* Shiphaton App */;
+			targetProxy = D2DAA2863045C64C002E5E10 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D2DAA28D3045C64C002E5E10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8X28Q9D8U2;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D2DAA28E3045C64C002E5E10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8X28Q9D8U2;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D2DAA2903045C64C002E5E10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_ATTEST_ENVIRONMENT = development;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Shiphaton App/Shiphaton App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 8X28Q9D8U2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Config/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = satisfed;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Snap a photo of what you're eating so we can help make it more satisfying.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dndapplications.satisfed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D2DAA2913045C64C002E5E10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APP_ATTEST_ENVIRONMENT = production;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Shiphaton App/Shiphaton App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 8X28Q9D8U2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Config/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = satisfed;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Snap a photo of what you're eating so we can help make it more satisfying.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dndapplications.satisfed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D2DAA2933045C64C002E5E10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8X28Q9D8U2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dndapplications.bite.Shiphaton-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shiphaton App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shiphaton App";
+			};
+			name = Debug;
+		};
+		D2DAA2943045C64C002E5E10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8X28Q9D8U2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dndapplications.bite.Shiphaton-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shiphaton App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Shiphaton App";
+			};
+			name = Release;
+		};
+		D2DAA2963045C64C002E5E10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8X28Q9D8U2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dndapplications.bite.Shiphaton-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Shiphaton App";
+			};
+			name = Debug;
+		};
+		D2DAA2973045C64C002E5E10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8X28Q9D8U2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dndapplications.bite.Shiphaton-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Shiphaton App";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D2DAA2673045C64A002E5E10 /* Build configuration list for PBXProject "Shiphaton App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2DAA28D3045C64C002E5E10 /* Debug */,
+				D2DAA28E3045C64C002E5E10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2DAA28F3045C64C002E5E10 /* Build configuration list for PBXNativeTarget "Shiphaton App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2DAA2903045C64C002E5E10 /* Debug */,
+				D2DAA2913045C64C002E5E10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2DAA2923045C64C002E5E10 /* Build configuration list for PBXNativeTarget "Shiphaton AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2DAA2933045C64C002E5E10 /* Debug */,
+				D2DAA2943045C64C002E5E10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2DAA2953045C64C002E5E10 /* Build configuration list for PBXNativeTarget "Shiphaton AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2DAA2963045C64C002E5E10 /* Debug */,
+				D2DAA2973045C64C002E5E10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		906CACA05ADF1860B8B733B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+		A1C0FEE10001000000000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D9F5757A594FDFCCCF1D768 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 906CACA05ADF1860B8B733B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		63429D5947869FBF84C9C91D /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 906CACA05ADF1860B8B733B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		64698BA991088807E059D938 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 906CACA05ADF1860B8B733B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		A1C0FEE10001000000000002 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1C0FEE10001000000000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		A1C0FEE10001000000000003 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1C0FEE10001000000000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D2DAA2643045C64A002E5E10 /* Project object */;
+}

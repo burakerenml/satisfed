@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// The ledger and the entitlement mirror are written only by the Cloud
+// Functions, which use the Admin SDK and bypass these rules entirely. No
+// client has any business reading or writing them: if a phone could edit
+// `subscribers/{id}.freeLoop`, the paywall would be a suggestion.
+//
+// The app asks about its own state through the `entitlementStatus`
+// callable, which is App Check gated and answers from the server's read.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
