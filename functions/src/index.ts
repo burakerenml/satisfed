@@ -9,11 +9,12 @@
  */
 
 import { onCall, onRequest, HttpsError } from "firebase-functions/v2/https";
-import { defineSecret, defineBoolean, defineString } from "firebase-functions/params";
+import { defineSecret, defineBoolean, defineInt, defineString } from "firebase-functions/params";
 import { logger } from "firebase-functions";
 import { timingSafeEqual } from "node:crypto";
 import { systemPrompt } from "./prompts";
-import { Feature, appUserID, applyWebhookEvent, authorize, closeFreeLoop, readState } from "./entitlements";
+import { Feature, ProState, appUserID, applyWebhookEvent, authorize, closeFreeLoop, readState } from "./entitlements";
+import { DAY_MS, HOUR_MS, MINUTE_MS, hit } from "./limits";
 
 const MAX_COMPLETION_TOKENS = 4000;
 
@@ -35,6 +36,57 @@ const revenueCatWebhookSecret = defineSecret("REVENUECAT_WEBHOOK_SECRET");
  *  in and the app still offers the paywall, but nothing is refused. Useful
  *  for the first deploy, before the webhook has been seen working. */
 const paywallEnforce = defineBoolean("PAYWALL_ENFORCE", { default: true });
+
+/** How hard the AI can be leaned on (see limits.ts). Each is a param, so
+ *  it can be tuned in `.env.<project>` without touching code. An int param
+ *  that is missing at runtime reads as 0, and a limit of 0 would refuse
+ *  every call, so anything but a positive number falls back to the
+ *  default instead. */
+function limit(name: string, fallback: number): () => number {
+  const param = defineInt(name, { default: fallback });
+  return () => {
+    const value = param.value();
+    return value > 0 ? value : fallback;
+  };
+}
+/** The per-id limits sit well above what a person tapping through the
+ *  app can reach: a plate flow is a photo read, a deck or two and a
+ *  summary, minutes apart. */
+const aiPerIdPerMinute = limit("AI_PER_ID_PER_MINUTE", 10);
+/** Applies to subscribers too: nobody eats a hundred snacks a day. */
+const aiPerIdPerDay = limit("AI_PER_ID_PER_DAY", 100);
+/** Every free-loop call across every id. A wave of fresh ids runs into
+ *  this, and only this: subscribers are counted on the budget below. */
+const aiFreeTierGlobalPerDay = limit("AI_FREE_TIER_GLOBAL_PER_DAY", 1500);
+/** Every AI call, full stop. The hard ceiling on the Azure bill. */
+const aiGlobalPerDay = limit("AI_GLOBAL_PER_DAY", 5000);
+/** How often one id may force a live RevenueCat lookup with `fresh`. */
+const freshPerIdPerHour = limit("FRESH_PER_ID_PER_HOUR", 12);
+
+/** What the app gets when a limit trips. It lands with the app as an
+ *  ordinary failed call ("try again in a moment", or the offline copy),
+ *  never as the paywall: being busy is not the person's fault. */
+const RATE_LIMITED = "RATE_LIMITED";
+
+function rateLimited(id: string, limit: string, global = false): never {
+  if (global) {
+    logger.error("A global AI budget is spent; AI calls are being refused", { id, limit });
+  } else {
+    logger.warn("Rate limit refused this call", { id, limit });
+  }
+  throw new HttpsError("resource-exhausted", RATE_LIMITED, { code: RATE_LIMITED, limit });
+}
+
+/** `fresh` is the client's say-so and costs two RevenueCat calls, so it is
+ *  capped per id. Past the cap it is quietly dropped rather than refused:
+ *  the gate still re-checks RevenueCat on its own before it turns anyone
+ *  away, so a real buyer is never refused because of this. */
+async function allowFresh(id: string, asked: unknown): Promise<boolean> {
+  if (asked !== true) return false;
+  if (await hit(`fresh:${id}`, freshPerIdPerHour(), HOUR_MS)) return true;
+  logger.warn("Ignoring fresh: this id has asked too often", { id });
+  return false;
+}
 
 // A distressed message can be blocked by Azure's own content filter before
 // the model runs. Answer supportively, never with a raw error.
@@ -274,12 +326,33 @@ export const comboAI = onCall<ComboAIRequest>(
     // is either subscribed or still holding their one free loop. Throws
     // PAYWALL_REQUIRED when they are neither.
     const id = appUserID(data.appUserID);
+
+    // One id at a human pace, first. These run before anything else is
+    // counted, so an id hammering the door is turned away here and never
+    // eats into the shared budgets below.
+    const [underMinute, underDay] = await Promise.all([
+      hit(`ai-min:${id}`, aiPerIdPerMinute(), MINUTE_MS),
+      hit(`ai-day:${id}`, aiPerIdPerDay(), DAY_MS),
+    ]);
+    if (!underMinute) rateLimited(id, "AI_PER_ID_PER_MINUTE");
+    if (!underDay) rateLimited(id, "AI_PER_ID_PER_DAY");
+
     const gate = await authorize(id, {
       feature: featureOf(data.bot),
       isVision: data.bot === "snackAnalyzer",
       enforce: paywallEnforce.value(),
       secretKey: revenueCatSecretKey.value(),
-      fresh: data.fresh === true,
+      fresh: await allowFresh(id, data.fresh),
+      // The shared daily budgets, checked once the gate knows whether this
+      // is a free-loop call and before it opens the loop. Free calls have
+      // a budget of their own, so a wave of fresh ids runs out of that
+      // long before it can crowd out anyone who is paying.
+      admit: async (pro: ProState) => {
+        if (pro === "free" && !(await hit("ai-free-global", aiFreeTierGlobalPerDay(), DAY_MS))) {
+          rateLimited(id, "AI_FREE_TIER_GLOBAL_PER_DAY", true);
+        }
+        if (!(await hit("ai-global", aiGlobalPerDay(), DAY_MS))) rateLimited(id, "AI_GLOBAL_PER_DAY", true);
+      },
     });
 
     switch (data.bot) {
@@ -382,14 +455,12 @@ export const entitlementStatus = onCall<{ appUserID?: string; fresh?: boolean }>
     timeoutSeconds: 20,
   },
   async (request) => {
-    const state = await readState(
-      appUserID(request.data?.appUserID),
-      revenueCatSecretKey.value(),
-      request.data?.fresh === true
-    );
+    const id = appUserID(request.data?.appUserID);
+    const state = await readState(id, revenueCatSecretKey.value(), await allowFresh(id, request.data?.fresh));
     return {
-      // "unknown" means we couldn't reach RevenueCat. The gate fails open
-      // in that case, so the app should too: no paywall on a bad network.
+      // "unknown" means we couldn't reach RevenueCat for someone recently
+      // subscribed. The gate fails open in that case, so the app should
+      // too: no paywall on a bad network.
       // The app reads `proState` to tell "paid" from "couldn't check";
       // `pro` stays for anything still reading the older shape.
       pro: state.pro !== "free",

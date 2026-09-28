@@ -29,7 +29,7 @@ if (getApps().length === 0) initializeApp();
  *  "(default)". Left unnamed, the Admin SDK answers every read with
  *  "5 NOT_FOUND" and the webhook and the gate both fail. */
 export const FIRESTORE_DATABASE = "satisfed";
-const db = getFirestore(FIRESTORE_DATABASE);
+export const db = getFirestore(FIRESTORE_DATABASE);
 
 /** The entitlement configured in the RevenueCat dashboard. */
 export const ENTITLEMENT_ID = "Premium";
@@ -54,6 +54,12 @@ const MIRROR_MAX_AGE_MS = 6 * 60 * 60 * 1000;
  *  is how often that live re-check may repeat for one id, so a client
  *  looping on a refused call can't turn the gate into a RevenueCat relay. */
 const RECHECK_MIN_INTERVAL_MS = 30 * 1000;
+/** When RevenueCat can't be reached, only someone the mirror has seen
+ *  paying is waved through, and only this long past the expiry it last
+ *  recorded: long enough to ride out an outage across a renewal whose
+ *  webhook hasn't landed, short enough that a subscription lapsed for good
+ *  doesn't stay open. Everyone else meets the free-loop ledger as usual. */
+const GRACE_PERIOD_MS = 3 * 24 * 60 * 60 * 1000;
 
 export type ProState = "pro" | "free" | "unknown";
 export type FreeLoopStatus = "unused" | "active" | "used";
@@ -91,7 +97,8 @@ interface RevenueCatEntitlement {
 
 /** Asks RevenueCat directly. Returns `unknown` for anything that isn't a
  *  clear answer (no key configured, network trouble, a 5xx) so the caller
- *  can fail open rather than lock out someone who has actually paid. */
+ *  can fall back on the mirror rather than lock out someone who has
+ *  actually paid (see `inconclusiveVerdict`). */
 interface Lookup {
   state: ProState;
   /** When the grant runs out. Null means lifetime, or nothing to expire. */
@@ -121,9 +128,10 @@ async function lookupRevenueCat(id: string, secretKey: string | undefined): Prom
 
 async function fetchSubscriber(id: string, secretKey: string | undefined, sandbox: boolean): Promise<Lookup> {
   if (!secretKey) {
-    // A configuration hole, not a network blip: without the key every
-    // never-seen id passes the gate. Loud on purpose.
-    logger.error("REVENUECAT_SECRET_KEY is not set; entitlements can't be checked and the gate is failing open.");
+    // A configuration hole, not a network blip: without the key nobody
+    // can be recognised as a new subscriber until the webhook writes the
+    // mirror. Loud on purpose.
+    logger.error("REVENUECAT_SECRET_KEY is not set; entitlements can't be checked live.");
     return INCONCLUSIVE;
   }
   const headers: Record<string, string> = { Authorization: `Bearer ${secretKey}`, Accept: "application/json" };
@@ -220,6 +228,19 @@ function mirrorVerdict(mirror: Mirror | undefined): ProState | null {
   return null;
 }
 
+/** The answer when RevenueCat was asked and couldn't say. A valid mirror
+ *  keeps its word, so a client repeating `fresh` can't turn RevenueCat
+ *  trouble into a free pass. Past that, "unknown" (the fail-open case) is
+ *  kept for ids the mirror has seen subscribed, inside the grace period.
+ *  A never-seen id, or one the mirror never showed paying, is "free": it
+ *  still gets its one free loop, just not unmetered AI on top. */
+function inconclusiveVerdict(mirror: Mirror | undefined, settled: ProState | null): ProState {
+  if (settled !== null) return settled;
+  if (mirror?.active !== true) return "free";
+  if (mirror.expiresAtMS == null) return "unknown";
+  return Date.now() - mirror.expiresAtMS < GRACE_PERIOD_MS ? "unknown" : "free";
+}
+
 // MARK: - The free loop ledger
 
 interface Ledger {
@@ -247,7 +268,8 @@ export async function readState(id: string, secretKey: string | undefined, fresh
   const data = snapshot.data() ?? {};
   const ledger = (data.freeLoop ?? {}) as Ledger;
 
-  const settled = mirrorVerdict(data.entitlement as Mirror | undefined);
+  const mirror = data.entitlement as Mirror | undefined;
+  const settled = mirrorVerdict(mirror);
   let pro = settled;
   // Right after a purchase the mirror can still say "free" for hours; the
   // app knows better and says so. A "pro" mirror is never second-guessed.
@@ -258,10 +280,9 @@ export async function readState(id: string, secretKey: string | undefined, fresh
       pro = lookup.state;
       await writeMirror(id, pro, lookup.expiresAtMS);
     } else {
-      // An inconclusive re-check leaves a valid mirror's word standing, so
-      // a client repeating `fresh` can't turn RevenueCat trouble into
-      // "unknown" and a free pass.
-      pro = settled ?? "unknown";
+      // Same rule as `authorize`, so this answer matches what the gate
+      // will actually do with the next call.
+      pro = inconclusiveVerdict(mirror, settled);
     }
   }
 
@@ -281,13 +302,25 @@ export async function readState(id: string, secretKey: string | undefined, fresh
  * open, any other feature is the paywall too: one free go means one, not
  * one per feature.
  *
- * Deliberately fails open when entitlement can't be determined. Charging
- * someone and then refusing to answer them is the one outcome worth
- * spending a few tokens to avoid.
+ * Fails open when entitlement can't be determined for someone the mirror
+ * has seen paying, within `GRACE_PERIOD_MS` of their last known expiry.
+ * Charging someone and then refusing to answer them is the one outcome
+ * worth spending a few tokens to avoid. Anyone else goes through the
+ * ledger, so a RevenueCat outage never means unmetered AI for strangers.
+ *
+ * `admit` runs once the subscription state is settled and before the
+ * ledger is touched; it throws to turn the call away.
  */
 export async function authorize(
   id: string,
-  options: { feature: Feature; isVision: boolean; enforce: boolean; secretKey: string | undefined; fresh?: boolean }
+  options: {
+    feature: Feature;
+    isVision: boolean;
+    enforce: boolean;
+    secretKey: string | undefined;
+    fresh?: boolean;
+    admit?: (pro: ProState) => Promise<void>;
+  }
 ): Promise<GateResult> {
   const reference = db.collection(COLLECTION).doc(id);
   const snapshot = await reference.get();
@@ -308,15 +341,20 @@ export async function authorize(
       pro = lookup.state;
       await writeMirror(id, pro, lookup.expiresAtMS);
     } else {
-      // Same rule as `readState`: a valid mirror outranks an inconclusive
-      // re-check the client asked for. Only a mirror that has really
-      // lapsed leaves "unknown", which is the fail-open case.
-      pro = settled ?? "unknown";
+      // A valid mirror outranks an inconclusive re-check the client asked
+      // for; past that, only a recent subscriber is waved through.
+      pro = inconclusiveVerdict(mirror, settled);
     }
   }
 
-  // Subscribed, or we couldn't find out. Either way, answer them, and
-  // leave the ledger alone so a free loop never quietly burns down while
+  // Anything that caps spending (rate limits, the daily budgets) gets its
+  // say here, once it is known whose call this is and before the ledger
+  // is touched: a free loop must never be opened by a call that is then
+  // turned away.
+  await options.admit?.(pro);
+
+  // Subscribed, or a recent subscriber we couldn't check. Either way,
+  // answer them, and leave the ledger alone so a free loop never quietly burns down while
   // someone is paying for it.
   if (pro !== "free") {
     return { pro, freeLoop: ((data.freeLoop ?? {}) as Ledger).status ?? "unused" };
